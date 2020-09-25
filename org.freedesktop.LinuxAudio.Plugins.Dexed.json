@@ -11,35 +11,7 @@
     },
     "modules": [
         {
-            "name": "dexed-vst",
-            "buildsystem": "simple",
-            "build-commands": [
-                "make -C Builds/Linux VST"
-            ],
-            "build-options": {
-                "env": {
-                    "PREFIX": "${FLATPAK_DEST}"
-                }
-            },
-            "post-install": [
-                "install -d ${FLATPAK_DEST}/lxvst",
-                "install -t ${FLATPAK_DEST}/lxvst Builds/Linux/build/Dexed.so",
-                "strip ${FLATPAK_DEST}/lxvst/Dexed.so"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://github.com/asb2m10/dexed/archive/v0.9.4hf1.tar.gz",
-                    "sha256": "31fad32d7111c9f7c25047a53f4b5aa9a685e573ec7892212aa21d4704312713"
-                },
-                {
-                    "type": "patch",
-                    "path": "dexed-fixes.patch"
-                }
-            ]
-        },
-        {
-            "name": "dexed",
+            "name": "dexed-vst3",
             "buildsystem": "simple",
             "build-commands": [
                 "./scripts/projuce-lin.sh",
@@ -50,12 +22,13 @@
                     "PREFIX": "${FLATPAK_DEST}"
                 }
             },
+            "only-arches": [
+                "x86_64"
+            ],
             "post-install": [
                 "install -d ${FLATPAK_DEST}/vst3",
                 "cp -R Builds/Linux/build/Dexed.vst3 ${FLATPAK_DEST}/vst3",
-                "strip --strip-unneeded ${FLATPAK_DEST}/vst3/Dexed.vst3/Contents/*/Dexed.so",
-                "install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo org.freedesktop.LinuxAudio.Plugins.Dexed.metainfo.xml",
-                "appstream-compose --basename=org.freedesktop.LinuxAudio.Plugins.Dexed --prefix=${FLATPAK_DEST} --origin=flatpak org.freedesktop.LinuxAudio.Plugins.Dexed"
+                "strip --strip-unneeded ${FLATPAK_DEST}/vst3/Dexed.vst3/Contents/*/Dexed.so"
             ],
             "sources": [
                 {
@@ -72,6 +45,36 @@
                 {
                     "type": "patch",
                     "path": "dexed-juce.patch"
+                }
+            ]
+        },
+        {
+            "name": "dexed",
+            "buildsystem": "simple",
+            "build-commands": [
+                "make -C Builds/Linux VST"
+            ],
+            "build-options": {
+                "env": {
+                    "PREFIX": "${FLATPAK_DEST}"
+                }
+            },
+            "post-install": [
+                "install -d ${FLATPAK_DEST}/lxvst",
+                "install -t ${FLATPAK_DEST}/lxvst Builds/Linux/build/Dexed.so",
+                "strip ${FLATPAK_DEST}/lxvst/Dexed.so",
+                "install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo org.freedesktop.LinuxAudio.Plugins.Dexed.metainfo.xml",
+                "appstream-compose --basename=org.freedesktop.LinuxAudio.Plugins.Dexed --prefix=${FLATPAK_DEST} --origin=flatpak org.freedesktop.LinuxAudio.Plugins.Dexed"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/asb2m10/dexed/archive/v0.9.4hf1.tar.gz",
+                    "sha256": "31fad32d7111c9f7c25047a53f4b5aa9a685e573ec7892212aa21d4704312713"
+                },
+                {
+                    "type": "patch",
+                    "path": "dexed-fixes.patch"
                 },
                 {
                     "type": "file",
