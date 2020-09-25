@@ -11,7 +11,7 @@
     },
     "modules": [
         {
-            "name": "dexed",
+            "name": "dexed-vst",
             "buildsystem": "simple",
             "build-commands": [
                 "make -C Builds/Linux VST"
@@ -24,9 +24,7 @@
             "post-install": [
                 "install -d ${FLATPAK_DEST}/lxvst",
                 "install -t ${FLATPAK_DEST}/lxvst Builds/Linux/build/Dexed.so",
-                "strip ${FLATPAK_DEST}/lxvst/Dexed.so",
-                "install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo org.freedesktop.LinuxAudio.Plugins.Dexed.metainfo.xml",
-                "appstream-compose --basename=org.freedesktop.LinuxAudio.Plugins.Dexed --prefix=${FLATPAK_DEST} --origin=flatpak org.freedesktop.LinuxAudio.Plugins.Dexed"
+                "strip ${FLATPAK_DEST}/lxvst/Dexed.so"
             ],
             "sources": [
                 {
@@ -37,6 +35,43 @@
                 {
                     "type": "patch",
                     "path": "dexed-fixes.patch"
+                }
+            ]
+        },
+        {
+            "name": "dexed",
+            "buildsystem": "simple",
+            "build-commands": [
+                "./scripts/projuce-lin.sh",
+                "(cd Builds/Linux && make CONFIG=Release VST3)"
+            ],
+            "build-options": {
+                "env": {
+                    "PREFIX": "${FLATPAK_DEST}"
+                }
+            },
+            "post-install": [
+                "install -d ${FLATPAK_DEST}/vst3",
+                "cp -R Builds/Linux/build/Dexed.vst3 ${FLATPAK_DEST}/vst3",
+                "strip --strip-unneeded ${FLATPAK_DEST}/vst3/Dexed.vst3/Contents/*/Dexed.so",
+                "install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo org.freedesktop.LinuxAudio.Plugins.Dexed.metainfo.xml",
+                "appstream-compose --basename=org.freedesktop.LinuxAudio.Plugins.Dexed --prefix=${FLATPAK_DEST} --origin=flatpak org.freedesktop.LinuxAudio.Plugins.Dexed"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/asb2m10/dexed.git",
+                    "tag": "v0.9.5"
+                },
+                {
+                    "type": "archive",
+                    "url": "https://github.com/juce-framework/JUCE/releases/download/6.0.1/juce-6.0.1-linux.zip",
+                    "sha256": "dcaac2c8a9f752ffd8d65325cea9224421f018786c229b46fdbc0cba180c5737",
+                    "dest": "assets/JUCE"
+                },
+                {
+                    "type": "patch",
+                    "path": "dexed-juce.patch"
                 },
                 {
                     "type": "file",
