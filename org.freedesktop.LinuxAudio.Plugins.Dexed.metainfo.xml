@@ -3,12 +3,30 @@
   <id>org.freedesktop.LinuxAudio.Plugins.Dexed</id>
   <extends>org.freedesktop.LinuxAudio.BaseExtension</extends>
   <name>Dexed</name>
-  <summary>Dexed FM Synthesizer VST plugin</summary>
+  <summary>Dexed FM Synthesizer VST/VST3 plugin</summary>
   <url type="homepage">https://asb2m10.github.io/dexed</url>
   <project_license>GPL-3.0+</project_license>
   <metadata_license>CC0-1.0</metadata_license>
   <update_contact>hub_AT_figuiere.net</update_contact>
   <releases>
+    <release date="2020-09-23" version="0.9.5">
+      <url>https://github.com/asb2m10/dexed/releases/tag/v0.9.5</url>
+      <description>
+        <ul>
+          <li>Added support for SCL/KBM microtuning</li>
+          <li>Added initial support for MPE performance</li>
+          <li>A Collection of small UI changes, including higher
+          contrast GUI assets, better sub-window management, and mouse
+          wheel support</li>
+          <li>UI can be scaled to 150%; work in progress</li>
+          <li>Better accuracy on DX7 envelopes</li>
+          <li>VST3 support</li>
+        </ul>
+        <p>VST2 has been dropped because of licensing issues. Because
+        of this the previous version is still included in this
+        flatpak.</p>
+      </description>
+    </release>
     <release date="2018-03-18" version="0.9.4hf1" />
   </releases>
 </component>
