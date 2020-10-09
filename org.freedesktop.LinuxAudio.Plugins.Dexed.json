@@ -7,14 +7,16 @@
     "build-extension": true,
     "appstream-compose": false,
     "build-options": {
-        "prefix": "/app/extensions/Plugins/Dexed"
+        "prefix": "/app/extensions/Plugins/Dexed",
+        "prepend-path": "/app/extensions/Plugins/Dexed/bin"
     },
     "modules": [
         {
             "name": "dexed-vst3",
             "buildsystem": "simple",
             "build-commands": [
-                "./scripts/projuce-lin.sh",
+                "(cd assets/JUCE/extras/Projucer/Builds/LinuxMakefile/ && make)",
+                "assets/JUCE/extras/Projucer/Builds/LinuxMakefile/build/Projucer --resave Dexed.jucer",
                 "(cd Builds/Linux && make CONFIG=Release VST3)"
             ],
             "build-options": {
@@ -22,9 +24,6 @@
                     "PREFIX": "${FLATPAK_DEST}"
                 }
             },
-            "only-arches": [
-                "x86_64"
-            ],
             "post-install": [
                 "install -d ${FLATPAK_DEST}/vst3",
                 "cp -R Builds/Linux/build/Dexed.vst3 ${FLATPAK_DEST}/vst3",
@@ -37,9 +36,9 @@
                     "tag": "v0.9.5"
                 },
                 {
-                    "type": "archive",
-                    "url": "https://github.com/juce-framework/JUCE/releases/download/6.0.1/juce-6.0.1-linux.zip",
-                    "sha256": "dcaac2c8a9f752ffd8d65325cea9224421f018786c229b46fdbc0cba180c5737",
+                    "type": "git",
+                    "url": "https://github.com/juce-framework/JUCE.git",
+                    "tag": "6.0.1",
                     "dest": "assets/JUCE"
                 },
                 {
