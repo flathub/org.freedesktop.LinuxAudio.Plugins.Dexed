@@ -17,6 +17,7 @@
             "build-commands": [
                 "(cd assets/JUCE/extras/Projucer/Builds/LinuxMakefile/ && make)",
                 "assets/JUCE/extras/Projucer/Builds/LinuxMakefile/build/Projucer --resave Dexed.jucer",
+                "sed -e \"s|Contents/x86_64-linux|Contents/`uname -m`-linux|g\" -i ./Builds/Linux/Makefile",
                 "(cd Builds/Linux && make CONFIG=Release VST3)"
             ],
             "build-options": {
