@@ -15,6 +15,7 @@
             "name": "dexed-vst3",
             "buildsystem": "simple",
             "build-commands": [
+                "sed -e s/arm64/aarch64/g -i assets/JUCE/extras/Build/CMake/juce_runtime_arch_detection.cpp assets/JUCE/extras/Projucer/JuceLibraryCode/BinaryData.cpp",
                 "(cd assets/JUCE/extras/Projucer/Builds/LinuxMakefile/ && make)",
                 "assets/JUCE/extras/Projucer/Builds/LinuxMakefile/build/Projucer --resave Dexed.jucer",
                 "sed -e \"s|Contents/x86_64-linux|Contents/`uname -m`-linux|g\" -i ./Builds/Linux/Makefile",
