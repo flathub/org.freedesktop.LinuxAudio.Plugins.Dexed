@@ -61,7 +61,6 @@
                 }
             },
             "post-install": [
-                "ln -sf vst $FLATPAK_DEST/lxvst",
                 "install -Dm755 -t ${FLATPAK_DEST}/vst Builds/Linux/build/Dexed.so",
                 "strip ${FLATPAK_DEST}/vst/Dexed.so",
                 "install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo org.freedesktop.LinuxAudio.Plugins.Dexed.metainfo.xml",
