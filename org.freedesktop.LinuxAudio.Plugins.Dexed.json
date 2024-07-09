@@ -5,53 +5,36 @@
     "runtime-version": "stable",
     "sdk": "org.freedesktop.Sdk//23.08",
     "build-extension": true,
-    "appstream-compose": false,
     "build-options": {
         "prefix": "/app/extensions/Plugins/Dexed",
         "prepend-path": "/app/extensions/Plugins/Dexed/bin"
     },
     "modules": [
         {
-            "name": "dexed-vst3",
-            "buildsystem": "simple",
-            "build-commands": [
-                "sed -e s/arm64/aarch64/g -i assets/JUCE/extras/Build/CMake/juce_runtime_arch_detection.cpp assets/JUCE/extras/Projucer/JuceLibraryCode/BinaryData.cpp",
-                "(cd assets/JUCE/extras/Projucer/Builds/LinuxMakefile/ && make)",
-                "assets/JUCE/extras/Projucer/Builds/LinuxMakefile/build/Projucer --resave Dexed.jucer",
-                "sed -e \"s|Contents/x86_64-linux|Contents/`uname -m`-linux|g\" -i ./Builds/Linux/Makefile",
-                "(cd Builds/Linux && make CONFIG=Release VST3)"
+            "name": "dexed",
+            "buildsystem": "cmake-ninja",
+            "no-make-install": true,
+            "config-opts": [
+                "-DJUCE_COPY_PLUGIN_AFTER_BUILD=OFF"
             ],
-            "build-options": {
-                "env": {
-                    "PREFIX": "${FLATPAK_DEST}"
-                }
-            },
             "post-install": [
                 "install -d ${FLATPAK_DEST}/vst3",
-                "cp -R Builds/Linux/build/Dexed.vst3 ${FLATPAK_DEST}/vst3",
+                "cp -R Source/Dexed_artefacts/VST3/Dexed.vst3 ${FLATPAK_DEST}/vst3",
+                "install -Dm755 Source/Dexed_artefacts/CLAP/Dexed.clap -t ${FLATPAK_DEST}/clap",
                 "strip --strip-unneeded ${FLATPAK_DEST}/vst3/Dexed.vst3/Contents/*/Dexed.so",
-                "install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo org.freedesktop.LinuxAudio.Plugins.Dexed.metainfo.xml",
-                "appstream-compose --basename=org.freedesktop.LinuxAudio.Plugins.Dexed --prefix=${FLATPAK_DEST} --origin=flatpak org.freedesktop.LinuxAudio.Plugins.Dexed"
+                "strip --strip-unneeded ${FLATPAK_DEST}/clap/*.clap",
+                "install -Dm644 org.freedesktop.LinuxAudio.Plugins.Dexed.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo"
             ],
             "sources": [
                 {
                     "type": "git",
                     "url": "https://github.com/asb2m10/dexed.git",
-                    "tag": "v0.9.6"
-                },
-                {
-                    "type": "git",
-                    "url": "https://github.com/juce-framework/JUCE.git",
-                    "tag": "6.0.7",
-                    "dest": "assets/JUCE"
+                    "tag": "v0.9.7pre3",
+                    "commit": "71f1292824207c448414ffac58f1373c596bb82f"
                 },
                 {
                     "type": "file",
                     "path": "org.freedesktop.LinuxAudio.Plugins.Dexed.metainfo.xml"
-                },
-                {
-                    "type": "patch",
-                    "path": "dexed-juce.patch"
                 }
             ]
         }
