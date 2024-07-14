@@ -9,9 +9,15 @@
   <metadata_license>CC0-1.0</metadata_license>
   <update_contact>hub_AT_figuiere.net</update_contact>
   <releases>
-    <release date="2024-07-09" version="0.9.7pre4">
+    <release date="2024-07-13" version="0.9.7">
       <description>
-        <p>Added CLAP plugins.</p>
+        <ul>
+          <li>MTS-ESP microtuning support</li>
+          <li>CLAP plugin support (sadly scaling is not available for now, but we are working on this)</li>
+          <li>Scalable UI upgrade (better resolution), optimized UI redraw</li>
+          <li>More accurate VU meter.</li>
+          <li>Fix for VST3 automation (again)</li>
+        </ul>
       </description>
     </release>
     <release date="2020-09-23" version="0.9.6">

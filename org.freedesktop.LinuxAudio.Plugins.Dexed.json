@@ -29,8 +29,8 @@
                 {
                     "type": "git",
                     "url": "https://github.com/asb2m10/dexed.git",
-                    "tag": "v0.9.7pre4",
-                    "commit": "4f4a339862c4a459a6f6f22984a97c19156239a0"
+                    "tag": "v0.9.7",
+                    "commit": "c1ddf06e9e99ad51b0c6764c352b6586aca0aa68"
                 },
                 {
                     "type": "file",
