@@ -8,7 +8,18 @@
   <project_license>GPL-3.0+</project_license>
   <metadata_license>CC0-1.0</metadata_license>
   <update_contact>hub_AT_figuiere.net</update_contact>
+  <developer_name>Dexed Developers</developer_name>
   <releases>
+    <release date="2024-10-08" version="0.9.8">
+      <description>
+        <ul>
+          <li>Accessibility implementation (including keyboard shortcuts)</li>
+          <li>UI component refresh</li>
+          <li>Mono/Poly parameter is now a plugin parameter</li>
+          <li>Copy/paste operator values are now text based (and system wide)</li>
+        </ul>
+      </description>
+    </release>
     <release date="2024-07-13" version="0.9.7">
       <description>
         <ul>
