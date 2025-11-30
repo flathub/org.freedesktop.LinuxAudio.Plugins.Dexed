@@ -10,6 +10,40 @@
   <update_contact>hub_AT_figuiere.net</update_contact>
   <developer_name>Dexed Developers</developer_name>
   <releases>
+    <release date="2025-11-29" version="1.0.1">
+      <description>
+        <ul>
+          <li>Remove default scaling detection. Fixes #501</li>
+          <li>CLAP scaling issue. Fixes #413</li>
+          <li>Assign dialog window to plugin component. Fixes
+          #268</li>
+        </ul>
+      </description>
+    </release>
+    <release date="2025-11-15" version="0.9.9">
+      <description>
+        <ul>
+          <li>Should implement #141 by @asb2m10 in #470</li>
+          <li>Fix link to Linux dependencies by @blegat in #380</li>
+          <li>Feature/portamento by @asb2m10 in #479</li>
+          <li>Respect MIDI channel on control change mappings. #344 by
+          @asb2m10 in #482</li>
+          <li>UI Scaling issues when reopening Dexed UI by @asb2m10 in
+          #480</li>
+          <li>Fix LFO rate on higher values by @asb2m10 in #481</li>
+          <li>mousewheel_sensitivity by @asb2m10 in #483</li>
+          <li>Transfer signal from any note at same pitch to avoid
+          interference by @akwizgran in #488</li>
+          <li>Improve voice stealing logic to reduce clicking and
+          interference by @akwizgran in #489</li>
+          <li>Feature/pipeline upgrade by @asb2m10 in #490</li>
+          <li>Change active program text colour in the program list by
+          @asb2m10 in #492</li>
+          <li>Fix #476 Change active program text colour by @asb2m10
+          in #500</li>
+        </ul>
+      </description>
+    </release>
     <release date="2024-10-08" version="0.9.8">
       <description>
         <ul>
