@@ -15,12 +15,13 @@
             "buildsystem": "cmake-ninja",
             "no-make-install": true,
             "config-opts": [
-                "-DJUCE_COPY_PLUGIN_AFTER_BUILD=OFF"
+                "-DJUCE_COPY_PLUGIN_AFTER_BUILD=OFF",
+                "-DBUILD_ID=1.1.0"
             ],
             "post-install": [
                 "install -d ${FLATPAK_DEST}/vst3",
-                "cp -R Source/Dexed_artefacts/VST3/Dexed.vst3 ${FLATPAK_DEST}/vst3",
-                "install -Dm755 Source/Dexed_artefacts/CLAP/Dexed.clap -t ${FLATPAK_DEST}/clap",
+                "cp -R source/Dexed_artefacts/VST3/Dexed.vst3 ${FLATPAK_DEST}/vst3",
+                "install -Dm755 source/Dexed_artefacts/CLAP/Dexed.clap -t ${FLATPAK_DEST}/clap",
                 "strip --strip-unneeded ${FLATPAK_DEST}/vst3/Dexed.vst3/Contents/*/Dexed.so",
                 "strip --strip-unneeded ${FLATPAK_DEST}/clap/*.clap",
                 "install -Dm644 org.freedesktop.LinuxAudio.Plugins.Dexed.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo"
@@ -29,8 +30,8 @@
                 {
                     "type": "git",
                     "url": "https://github.com/asb2m10/dexed.git",
-                    "tag": "v1.0.1",
-                    "commit": "bce5deee7c41bf5515b806d0b7de8b5c0bb49467"
+                    "tag": "v1.1.0",
+                    "commit": "fea2f0f0f2c397799f59b27eb11c038cd34b22c5"
                 },
                 {
                     "type": "file",
